@@ -126,7 +126,7 @@
 	</Canvas>
 </main>
 
-<footer>
+<section class="cta">
 	<button on:click={buy} class:loading disabled={loading}>
 		{#if loading}
 			Loading...
@@ -134,7 +134,7 @@
 			Buy now
 		{/if}
 	</button>
-</footer>
+</section>
 
 <style>
 	main {
@@ -182,14 +182,14 @@
 		border-color: #ddd;
 	}
 
-	footer {
+	.cta {
 		position: fixed;
 		bottom: 0px;
 		width: 100vw;
 		padding: 1rem;
 	}
 
-	footer button {
+	.cta button {
 		background: #6e37ca;
 		color: white;
 		font-size: 1.3rem;
@@ -199,7 +199,24 @@
 		width: 100%;
 	}
 
-	footer button:hover {
+	.cta button:hover {
 		background: #8460bf;
+	}
+
+	@media screen and (min-width: 480px) {
+		
+	}
+	@media screen and (min-width: 768px) {
+		.cta {
+			right: 0px;
+			width: 200px;
+		}
+	}
+	@media screen and (min-width: 1024px) {
+		.cta {
+			right: 0px;
+			top: 0px;
+			width: 200px;
+		}
 	}
 </style>
