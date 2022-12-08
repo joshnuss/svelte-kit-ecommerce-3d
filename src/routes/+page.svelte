@@ -56,51 +56,57 @@
 </script>
 
 <aside>
-	<h2>Colors</h2>
-	<ul class="colors">
-		{#each colors as color}
-			<li class:selected={color == selectedColor}>
+	<section>
+		<h2>Colors</h2>
+		<ul class="colors">
+			{#each colors as color}
+				<li class:selected={color == selectedColor}>
+					<button
+						style:background-color={color.value}
+						on:click|preventDefault={() => selectColor(color)}
+						title={color.name}>
+					</button>
+				</li>
+			{/each}
+		</ul>
+	</section>
+
+	<section>
+		<h2>Stretcher</h2>
+		<ul class="stretcher-options">
+			<li class:selected={!stretcher}>
 				<button
-					style:background-color={color.value}
-					on:click|preventDefault={() => selectColor(color)}
-					title={color.name}>
+					on:click|preventDefault={() => selectStretcher(false)}
+					title="No stretcher">
+					<Scene color={selectedColor.value} stretcher={false}/>
 				</button>
 			</li>
-		{/each}
-	</ul>
 
-	<h2>Stretcher</h2>
-	<ul class="stretcher-options">
-		<li class:selected={!stretcher}>
-			<button
-				on:click|preventDefault={() => selectStretcher(false)}
-				title="No stretcher">
-				<Scene color={selectedColor.value} stretcher={false}/>
-			</button>
-		</li>
-
-		<li class:selected={stretcher}>
-			<button
-				on:click|preventDefault={() => selectStretcher(true)}
-				title="Stretcher">
-				<Scene color={selectedColor.value} stretcher={true}/>
-			</button>
-		</li>
-	</ul>
-
-	<h2>Back</h2>
-	<ul class="back">
-		{#each backs as back}
-			<li class:selected={back == selectedBack}>
+			<li class:selected={stretcher}>
 				<button
-					style:color={selectedColor.value}
-					on:click|preventDefault={() => selectBack(back)}
-					title={back.name}>
-					<img src={back.path}/>
+					on:click|preventDefault={() => selectStretcher(true)}
+					title="Stretcher">
+					<Scene color={selectedColor.value} stretcher={true}/>
 				</button>
 			</li>
-		{/each}
-	</ul>
+		</ul>
+	</section>
+
+	<section>
+		<h2>Back</h2>
+		<ul class="back">
+			{#each backs as back}
+				<li class:selected={back == selectedBack}>
+					<button
+						style:color={selectedColor.value}
+						on:click|preventDefault={() => selectBack(back)}
+						title={back.name}>
+						<img src={back.path}/>
+					</button>
+				</li>
+			{/each}
+		</ul>
+	</section>
 </aside>
 
 <main>
@@ -142,16 +148,18 @@
 	aside {
 		position: fixed;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1rem;
 		margin: 1rem;
 	}
 
 	aside h2 {
-		margin: 0;
+		margin: 0 0 3px 0;
 		padding: 0;
 		display: block;
-		color: #444;
-		font-size: 1rem;
+		color: #555;
+		font-size: 0.8rem;
 		font-family: Inter, sans;
 		font-weight: normal;
 	}
@@ -161,6 +169,7 @@
 		list-style: none;
 		gap: 0.5rem;
 		padding: 0;
+		margin: 0px;
 	}
 
 	aside button {
@@ -174,5 +183,26 @@
 
 	aside .selected button {
 		border-color: #666;
+	}
+
+	footer {
+		position: fixed;
+		bottom: 0px;
+		width: 100vw;
+		padding: 1rem;
+	}
+
+	footer button {
+		background: #6e37ca;
+		color: white;
+		font-size: 1.3rem;
+		border: none;
+		border-radius: 3px;
+		padding: 1rem;
+		width: 100%;
+	}
+
+	footer button:hover {
+		background: #8460bf;
 	}
 </style>
