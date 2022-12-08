@@ -52,6 +52,8 @@
 		const { url } = await response.json();
 
 		window.location.href = url;
+
+		setTimeout(() => loading = false)
 	}
 </script>
 
