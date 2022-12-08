@@ -62,7 +62,7 @@
 			<li class:selected={color == selectedColor}>
 				<button
 					style:background-color={color.value}
-					on:click={() => selectColor(color)}
+					on:click|preventDefault={() => selectColor(color)}
 					title={color.name}>
 				</button>
 			</li>
@@ -73,7 +73,7 @@
 	<ul class="stretcher-options">
 		<li class:selected={!stretcher}>
 			<button
-				on:click={() => selectStretcher(false)}
+				on:click|preventDefault={() => selectStretcher(false)}
 				title="No stretcher">
 				<Scene color={selectedColor.value} stretcher={false}/>
 			</button>
@@ -81,7 +81,7 @@
 
 		<li class:selected={stretcher}>
 			<button
-				on:click={() => selectStretcher(true)}
+				on:click|preventDefault={() => selectStretcher(true)}
 				title="Stretcher">
 				<Scene color={selectedColor.value} stretcher={true}/>
 			</button>
@@ -94,7 +94,7 @@
 			<li class:selected={back == selectedBack}>
 				<button
 					style:color={selectedColor.value}
-					on:click={() => selectBack(back)}
+					on:click|preventDefault={() => selectBack(back)}
 					title={back.name}>
 					<img src={back.path}/>
 				</button>
