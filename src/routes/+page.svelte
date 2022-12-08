@@ -173,7 +173,7 @@
 	}
 
 	aside button {
-		background: none;
+		background: #fffa;
 		border: solid 1px transparent;
 		padding: 0;
 		border-radius: 3px;
@@ -182,7 +182,7 @@
 	}
 
 	aside .selected button {
-		border-color: #666;
+		border-color: #ddd;
 	}
 
 	footer {
