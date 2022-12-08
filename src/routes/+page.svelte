@@ -129,7 +129,7 @@
 <section class="cta">
 	<button on:click={buy} class:loading disabled={loading}>
 		{#if loading}
-			Loading...
+			Please wait...
 		{:else}
 			Buy now
 		{/if}
