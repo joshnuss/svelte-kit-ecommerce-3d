@@ -21,6 +21,7 @@
 	let selectedColor = colors[0]
 	let selectedBack = backs[0]
 	let stretcher = false
+	let loading = false
 
 	function selectColor(color) {
 		selectedColor = color
@@ -32,6 +33,25 @@
 
 	function selectStretcher(enabled) {
 		stretcher = enabled
+	}
+
+	async function buy() {
+		loading = true
+
+		const response = await fetch('/checkout', {
+			method: 'POST',
+			body: JSON.stringify({
+				quantity: 1,
+				options: {
+					color: selectedColor.name,
+					back: selectedBack.name,
+					stretcher,
+				}
+			})
+		})
+		const { url } = await response.json()
+
+		window.location.href = url
 	}
 </script>
 
@@ -102,6 +122,16 @@
 		</T.Mesh>
 	</Canvas>
 </main>
+
+<footer>
+	<button on:click={buy} class:loading disabled={loading}>
+		{#if loading}
+			Loading...
+		{:else}
+			Buy now
+		{/if}
+	</button>
+</footer>
 
 <style>
 	main {
