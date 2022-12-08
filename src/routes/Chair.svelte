@@ -1,6 +1,7 @@
 <script>
 	import { T } from '@threlte/core';
 	export let color
+	export let back
 	export let stretcher = true
 </script>
 
@@ -43,17 +44,57 @@
 			<T.MeshStandardMaterial {color} />
 		</T.Mesh>
 
-		<!-- Back horizontal #1 -->
-		<T.Mesh position.x={-0.75} position.y={3.5} position.z={0.2} castShadow>
-			<T.BoxGeometry args={[0.10,0.25,1.75]}/>
-			<T.MeshStandardMaterial {color} />
-		</T.Mesh>
+		{#if back == 'four'}
+			{#each {length: 4} as _, n}
+				<T.Mesh position.x={-0.75} position.y={3 + (n*0.5)} position.z={0.2} castShadow>
+					<T.BoxGeometry args={[0.10,0.25,1.75]}/>
+					<T.MeshStandardMaterial {color} />
+				</T.Mesh> 
+			{/each}
+		{:else if back == 'six'}
+			<T.Mesh position.x={-0.75} position.y={4.5} position.z={0.2} castShadow>
+				<T.BoxGeometry args={[0.10,0.25,1.75]}/>
+				<T.MeshStandardMaterial {color} />
+			</T.Mesh>
 
-		<!-- Back horizontal #2 -->
-		<T.Mesh position.x={-0.75} position.y={4.5} position.z={0.2} castShadow>
-			<T.BoxGeometry args={[0.10,0.25,1.75]}/>
-			<T.MeshStandardMaterial {color} />
-		</T.Mesh>
+			{#each {length: 4} as _, n}
+				<T.Mesh position.x={-0.75} position.y={3.5} position.z={-0.4+(n*0.35)} castShadow>
+					<T.BoxGeometry args={[0.1,2.25,0.1]}/>
+					<T.MeshStandardMaterial {color} />
+				</T.Mesh>
+			{/each}
+		{/if}
+
+		{#if back == 'two' || back == 'two-three'}
+			<!-- Back horizontal #1 -->
+			<T.Mesh position.x={-0.75} position.y={3.5} position.z={0.2} castShadow>
+				<T.BoxGeometry args={[0.10,0.25,1.75]}/>
+				<T.MeshStandardMaterial {color} />
+			</T.Mesh>
+
+			<!-- Back horizontal #2 -->
+			<T.Mesh position.x={-0.75} position.y={4.5} position.z={0.2} castShadow>
+				<T.BoxGeometry args={[0.10,0.25,1.75]}/>
+				<T.MeshStandardMaterial {color} />
+			</T.Mesh>
+
+			{#if back == 'two-three'}
+				<T.Mesh position.x={-0.75} position.y={4} position.z={0.45} castShadow>
+					<T.BoxGeometry args={[0.1,1,0.1]}/>
+					<T.MeshStandardMaterial {color} />
+				</T.Mesh>
+
+				<T.Mesh position.x={-0.75} position.y={4} position.z={0.10} castShadow>
+					<T.BoxGeometry args={[0.1,1,0.1]}/>
+					<T.MeshStandardMaterial {color} />
+				</T.Mesh>
+
+				<T.Mesh position.x={-0.75} position.y={4} position.z={-0.25} castShadow>
+					<T.BoxGeometry args={[0.1,1,0.1]}/>
+					<T.MeshStandardMaterial {color} />
+				</T.Mesh>
+			{/if}
+		{/if}
 	</T.Group>
 
 	<!-- Seat -->

@@ -11,11 +11,23 @@
 		{ name: 'white', value: '#e1e1e1' },
 	]
 
+	const backs = [
+		{ name: 'two', path: '/assets/back/two.svg' },
+		{ name: 'two-three', path: '/assets/back/two-three.svg' },
+		{ name: 'four', path: '/assets/back/four.svg' },
+		{ name: 'six', path: '/assets/back/six.svg' },
+	]
+
 	let selectedColor = colors[0]
+	let selectedBack = backs[0]
 	let stretcher = false
 
 	function selectColor(color) {
 		selectedColor = color
+	}
+
+	function selectBack(back) {
+		selectedBack = back
 	}
 
 	function selectStretcher(enabled) {
@@ -55,6 +67,20 @@
 			</button>
 		</li>
 	</ul>
+
+	<h2>Back</h2>
+	<ul class="back">
+		{#each backs as back}
+			<li class:selected={back == selectedBack}>
+				<button
+					style:color={selectedColor.value}
+					on:click={() => selectBack(back)}
+					title={back.name}>
+					<img src={back.path}/>
+				</button>
+			</li>
+		{/each}
+	</ul>
 </aside>
 
 <main>
@@ -63,11 +89,11 @@
 			<OrbitControls maxPolarAngle={degToRad(80)} enableZoom={true} target={{ y: 0.5 }} />
 		</T.PerspectiveCamera>
 
-		<T.DirectionalLight castShadow position={[3, 10, 10]} />
+		<T.DirectionalLight castShadow position={[5, 10, 10]} />
 		<T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
 		<T.AmbientLight intensity={0.2} />
 
-		<Chair color={selectedColor.value} {stretcher}/>
+		<Chair color={selectedColor.value} back={selectedBack.name} {stretcher}/>
 
 		<!-- Floor -->
 		<T.Mesh receiveShadow rotation.x={degToRad(-90)}>
