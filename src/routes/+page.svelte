@@ -1,42 +1,42 @@
 <script>
 	import { Canvas, OrbitControls, T } from '@threlte/core';
 	import { degToRad } from 'three/src/math/MathUtils';
-	import Chair from './Chair.svelte'
-	import Scene from './Scene.svelte'
+	import Chair from './Chair.svelte';
+	import Scene from './Scene.svelte';
 
 	const colors = [
 		{ name: 'red', value: '#ffee58' },
 		{ name: 'blue', value: '#1a237e' },
 		{ name: 'black', value: '#222' },
-		{ name: 'white', value: '#e1e1e1' },
-	]
+		{ name: 'white', value: '#e1e1e1' }
+	];
 
 	const backs = [
 		{ name: 'two', path: '/assets/back/two.svg' },
 		{ name: 'two-three', path: '/assets/back/two-three.svg' },
 		{ name: 'four', path: '/assets/back/four.svg' },
-		{ name: 'six', path: '/assets/back/six.svg' },
-	]
+		{ name: 'six', path: '/assets/back/six.svg' }
+	];
 
-	let selectedColor = colors[0]
-	let selectedBack = backs[0]
-	let stretcher = false
-	let loading = false
+	let selectedColor = colors[0];
+	let selectedBack = backs[0];
+	let stretcher = false;
+	let loading = false;
 
 	function selectColor(color) {
-		selectedColor = color
+		selectedColor = color;
 	}
 
 	function selectBack(back) {
-		selectedBack = back
+		selectedBack = back;
 	}
 
 	function selectStretcher(enabled) {
-		stretcher = enabled
+		stretcher = enabled;
 	}
 
 	async function buy() {
-		loading = true
+		loading = true;
 
 		const response = await fetch('/checkout', {
 			method: 'POST',
@@ -45,13 +45,13 @@
 				options: {
 					color: selectedColor.name,
 					back: selectedBack.name,
-					stretcher,
+					stretcher
 				}
 			})
-		})
-		const { url } = await response.json()
+		});
+		const { url } = await response.json();
 
-		window.location.href = url
+		window.location.href = url;
 	}
 </script>
 
@@ -64,8 +64,8 @@
 					<button
 						style:background-color={color.value}
 						on:click|preventDefault={() => selectColor(color)}
-						title={color.name}>
-					</button>
+						title={color.name}
+					/>
 				</li>
 			{/each}
 		</ul>
@@ -75,18 +75,14 @@
 		<h2>Stretcher</h2>
 		<ul class="stretcher-options">
 			<li class:selected={!stretcher}>
-				<button
-					on:click|preventDefault={() => selectStretcher(false)}
-					title="No stretcher">
-					<Scene color={selectedColor.value} stretcher={false}/>
+				<button on:click|preventDefault={() => selectStretcher(false)} title="No stretcher">
+					<Scene color={selectedColor.value} stretcher={false} />
 				</button>
 			</li>
 
 			<li class:selected={stretcher}>
-				<button
-					on:click|preventDefault={() => selectStretcher(true)}
-					title="Stretcher">
-					<Scene color={selectedColor.value} stretcher={true}/>
+				<button on:click|preventDefault={() => selectStretcher(true)} title="Stretcher">
+					<Scene color={selectedColor.value} stretcher={true} />
 				</button>
 			</li>
 		</ul>
@@ -100,8 +96,9 @@
 					<button
 						style:color={selectedColor.value}
 						on:click|preventDefault={() => selectBack(back)}
-						title={back.name}>
-						<img src={back.path}/>
+						title={back.name}
+					>
+						<img src={back.path} />
 					</button>
 				</li>
 			{/each}
@@ -119,7 +116,7 @@
 		<T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
 		<T.AmbientLight intensity={0.2} />
 
-		<Chair color={selectedColor.value} back={selectedBack.name} {stretcher}/>
+		<Chair color={selectedColor.value} back={selectedBack.name} {stretcher} />
 
 		<!-- Floor -->
 		<T.Mesh receiveShadow rotation.x={degToRad(-90)}>
