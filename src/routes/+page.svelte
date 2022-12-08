@@ -108,8 +108,8 @@
 
 <main>
 	<Canvas>
-		<T.PerspectiveCamera makeDefault position={[15, 15, 15]} fov={24}>
-			<OrbitControls maxPolarAngle={degToRad(80)} enableZoom={true} target={{ y: 0.5 }} />
+		<T.PerspectiveCamera makeDefault position={[15, 15, 20]} fov={15}>
+			<OrbitControls maxPolarAngle={degToRad(80)} enableZoom={true} target={{ y: 2.5 }} />
 		</T.PerspectiveCamera>
 
 		<T.DirectionalLight castShadow position={[5, 10, 10]} />
